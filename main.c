@@ -1,36 +1,28 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-
-struct Book {
-	int number;
-	char title[15];
+struct list {
+	int num;
+	struct list *next;
 };
 
 int main(void) {
-	int i;
-	struct Book **bookshelf;
+	struct list a = {10, 0}, b = {20, 0}, c = {30, 0};
+	struct list *head = &a, *current;
 	
-	bookshelf = (struct Book**)malloc(3 * sizeof (struct Book*));
-	for (i=0;i<3;i++) {
-		bookshelf[i] = (struct Book*)malloc(10 * sizeof (struct Book));
-	}
-		
-	bookshelf[1][3].number = 5;
-	strcpy(bookshelf[1][3].title, "C++ Programming");
+	a.next = &b;
+	b.next = &c;
 	
-	(bookshelf[2]+4)->number = 3;
-	strcpy((bookshelf[2]+4)->title, "Communications Theory");
-
-	printf("book (1,3) : %i, %s\n", (bookshelf[1]+3)->number, (bookshelf[1]+3)->title);
-	printf("book (2,4) : %i, %s\n", bookshelf[2][4].number, bookshelf[2][4].title);
-
-	for (i=0;i<3;i++) {
-		free(bookshelf[i]);
+	printf("head->num : %d\n", head->num);
+	printf("head->next->num : %d\n", head->next->num);
+	
+	printf("list all : ");
+	current = head;
+	while (current != NULL) {
+		printf("%d ", current->num);
+		current = current -> next;
 	}
-		
-	free(bookshelf);
-
+	
+	printf("\n");
+	
 	return 0;
 }
