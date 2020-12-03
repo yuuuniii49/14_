@@ -1,28 +1,23 @@
 #include <stdio.h>
-
-struct list {
-	int num;
-	struct list *next;
-};
+#include <stdlib.h>
 
 int main(void) {
-	struct list a = {10, 0}, b = {20, 0}, c = {30, 0};
-	struct list *head = &a, *current;
+	int n[5];
 	
-	a.next = &b;
-	b.next = &c;
+	printf("input 5 integers : ");
+	scanf("%d %d %d %d %d",n,n+1,n+2,n+3,n+4);
 	
-	printf("head->num : %d\n", head->num);
-	printf("head->next->num : %d\n", head->next->num);
+
+	insertDataToTail(n[0]);
+	insertDataToTail(n[1]);
+	insertDataToTail(n[2]);
+	insertDataToTail(n[3]);
+	insertDataToTail(n[4]);
 	
-	printf("list all : ");
-	current = head;
-	while (current != NULL) {
-		printf("%d ", current->num);
-		current = current -> next;
-	}
+	print_list();
 	
-	printf("\n");
+	print_node(2);
+
 	
 	return 0;
 }
