@@ -1,26 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+struct Book {
+	int number;
+	char title[15];
+};
 
-int main(int argc, char *argv[]) {
+int main(void) {
+	struct Book *p;
 	
-	char *pc = NULL;
-	int i = 0;
+	// Book 구조체 2개 동적할당 
+	p = (struct Book*) malloc (2*sizeof(struct Book));
 	
-	pc = (char *) malloc (100*sizeof(char));
-	if (pc == NULL) {
+	if (p == NULL) {
 		printf("메모리 할당 오류\n");
 		exit(1);
 	}
 	
-	for (i=0; i<26; i++) {
-		pc[i] = 'a' + i;
-	}
-	pc[i] = 0;
-	printf("%s\n", pc);
+	p->number = 1;
+	strcpy(p->title, "C Programming");
 	
-	free(pc);
+	(p+1)->number = 2;
+	strcpy((p+1)->title, "Electronics");
+	
+	printf("%d : %s\n", p->number, p->title);
+	printf("%d : %s\n", (p+1)->number, (p+1)->title);
+	
+	free(p);
 	
 	return 0;
 }
